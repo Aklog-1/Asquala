@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
     comment: {
         type: String,
         default: null
-    }, //           likes and comments to be changed later.
+    },  //           likes and comments to be changed later.
     timestamp: {
         type: Date,
         default: Date.now
