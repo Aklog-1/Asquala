@@ -9,7 +9,7 @@ const portNumber = 8000;    // ***PORT*** for deploying
 
 
 app.use(express.json())
-app.use("/apiroute", apiRouter)
+app.use("/apiRoute", apiRouter)
 
 
 mongoose.connect(
