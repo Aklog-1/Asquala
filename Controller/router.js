@@ -13,21 +13,20 @@ const apiRouter = express.Router();
 
 apiRouter.post("/signUp", async (req, res) => {
     
-    let {name, userName, email, password} = req.body
+    const {name, userName, email, password} = req.body
 
-    // const existingUser = await userSchema.findOne({email: email})
-    // if(existingUser) {
-    //     res.status(406).send({
-    //         message: `sorry, an account with email: ${email} has already been created.`
-    //     })
-    // }
-
-    // const SameUserName = await userSchema.findOne({userName: userName})
-    // if(SameUserName) {
-    //     res.status(406).send({
-    //         message: `sorry, user name taken. Try another one...`
-    //     })
-    // }
+    const existingUser = await userSchema.findOne({email: email})
+    if(existingUser) {
+        return res.status(406).send({
+            message: `sorry, an account with email: ${email} has already been created.`
+        })
+    }
+    const SameUserName = await userSchema.findOne({userName: userName})
+    if(SameUserName) {
+        return res.status(406).send({
+            message: `sorry, user name taken. Try another one...`
+        })
+    }
 
 
     const newUser = new userSchema({
@@ -39,7 +38,7 @@ apiRouter.post("/signUp", async (req, res) => {
     console.log(newUser)
 
     try {
-        await newUser.save();
+        await newUser.save()
         res.status(201).send({
             message: `Account successfully created!`,
             user: newUser

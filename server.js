@@ -15,7 +15,7 @@ app.use("/apiRoute", apiRouter)
 mongoose.connect(
     process.env.dataBaseUrl,
     { useNewUrlParser: true },
-    () => console.log('connected to DB')
+    () => console.log('connected to DB')    // I wonder this actually tells the truth
 );
 //process.env.MONGO_URL
 app.listen(portNumber, () => {
