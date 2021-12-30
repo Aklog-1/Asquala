@@ -28,7 +28,6 @@ apiRouter.post("/signUp", async (req, res) => {
         })
     }
 
-
     const newUser = new userSchema({
         name,
         userName,
@@ -49,6 +48,41 @@ apiRouter.post("/signUp", async (req, res) => {
         })
     }
 })
+
+
+
+
+// update status api
+
+apiRouter.put("/update/:id", async (req, res) => {
+
+    const userId = req.params.id
+
+    try {
+        const updatedUser = await userSchema.findByIdAndUpdate(userId, {$set: req.body})
+        res.status(201).send({
+            message: `status updated successfully!`,
+            user: updatedUser
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(400).send({
+            message: `something went wrong.`
+        })
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 
