@@ -8,7 +8,11 @@ const userSchema = require('../Model/User')
 const userRouter = express.Router();
 
 
-
+userRouter.get("/", (req, res) => {
+    res.status(200).send({
+        message: "Welcome to Asquala"
+    })
+})
 
 // Sign up API
 
@@ -90,7 +94,6 @@ userRouter.get("/getPerson/:userName", async (req, res) => {
             user: userFound
         })
     } catch (err) {
-        console.log(err)
         return res.status(500).send({message: `Something went wrong.`})
     }
     
