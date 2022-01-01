@@ -1,15 +1,15 @@
 
-const express = require('express');
-const apiRouter = require(`../Asquala mov't/Controller/router.js`)
+const express = require(`express`);
+const userRouter = require(`./Routes/userRoutes`)
 const mongoose = require(`mongoose`)
-require('dotenv/config')
+require(`dotenv/config`)
 
 const app = express();
 const portNumber = 8000;    // ***PORT*** for deploying
 
 
 app.use(express.json())
-app.use("/apiRoute", apiRouter)
+app.use("/userRoutes", userRouter)
 
 
 mongoose.connect(

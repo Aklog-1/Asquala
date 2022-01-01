@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
     posts: {
         type: [{
             type: mongoose.Schema.ObjectId,
-            ref: "posts"
-        }], default: []
+            ref: "posts"}], 
+        default: []
     },
 
     // followers: {},
