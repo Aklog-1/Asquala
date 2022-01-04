@@ -18,8 +18,8 @@ postRouter.get("/", (req, res) => {
 
 // create post
 postRouter.post("/createPost", async (req, res) => {
-    const {content, author} = req.body
 
+    const {content, author} = req.body
     const user = await userSchema.findById(author)
 
     const newPost = new postSchema({
