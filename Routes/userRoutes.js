@@ -1,18 +1,18 @@
 
 const { Router } = require('express');
-const express = require('express');
-const postSchema = require('../Model/Post')
 const userSchema = require('../Model/User')
 
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 
 userRouter.get("/", (req, res) => {
     res.status(200).send({
-        message: "Welcome to Asquala"
+        message: "Welcome to Asquala - this is users api"
     })
 })
+
+
 
 // Sign up API
 
@@ -21,13 +21,12 @@ userRouter.post("/signUp", async (req, res) => {
     const {name, userName, email, password} = req.body
 
     const existingUser = await userSchema.findOne({email: email})
-    if(existingUser) {
+    const SameUserName = await userSchema.findOne({userName: userName})
+    if (existingUser) {
         return res.status(406).send({
             message: `sorry, an account with email: ${email} has already been created.`
         })
-    }
-    const SameUserName = await userSchema.findOne({userName: userName})
-    if(SameUserName) {
+    } else if (SameUserName) {
         return res.status(406).send({
             message: `sorry, user name taken. Try another one...`
         })
@@ -79,7 +78,8 @@ userRouter.put("/update/:userName", async (req, res) => {
 
 
 
-// get other peoples api
+
+// get other people api
 
 userRouter.get("/getPerson/:userName", async (req, res) => {
     
@@ -98,19 +98,6 @@ userRouter.get("/getPerson/:userName", async (req, res) => {
     }
     
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
