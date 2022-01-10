@@ -17,6 +17,7 @@ postRouter.get("/", (req, res) => {
 
 
 // create post
+    // will do further on this one
 postRouter.post("/createPost", async (req, res) => {
 
     const {content, author} = req.body
@@ -43,6 +44,12 @@ postRouter.post("/createPost", async (req, res) => {
 
 
 
+
+
+
+postRouter.post("/commentOnPost", async (req, res) => {
+
+})
 
 
 

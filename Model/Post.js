@@ -10,14 +10,31 @@ const postSchema = new mongoose.Schema({
         ref: "users",
         required: true
     },
-    like: {
-        type: Number,
-        default: 0
+    likes: {
+        type: [{
+            actorId: {
+                type: mongoose.Schema.ObjectId, ref: "users"
+            },
+            likeType: {
+                type: String, default: "like"
+            }
+        }]
     },
-    comment: {
-        type: String,
+
+    comments: {
+        type: [{
+            actorId: {
+                type: mongoose.Schema.ObjectId, ref: "users"
+            },
+            commentContent: {
+                type: String,
+                default: null
+            }
+        }],
+
         default: null
-    },  //           likes and comments to be changed later.
+    },
+
     timestamp: {
         type: Date,
         default: Date.now
