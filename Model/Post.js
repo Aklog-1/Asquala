@@ -18,7 +18,8 @@ const postSchema = new mongoose.Schema({
             likeType: {
                 type: String, default: "like"
             }
-        }]
+        }],
+        default: null
     },
 
     comments: {

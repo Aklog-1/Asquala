@@ -41,10 +41,11 @@ userRouter.post("/signUp", async (req, res) => {
     console.log(newUser)
 
     try {
-        await newUser.save()
-        res.status(201).send({
+        let userSaved = await newUser.save()
+        userSaved.password = null
+        return res.status(201).send({
             message: `Account successfully created!`,
-            user: newUser
+            user: userSaved
         })
     } catch (err) {
         res.send({
