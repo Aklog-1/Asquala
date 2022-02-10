@@ -60,4 +60,24 @@ postRouter.post("/commentOnPost", async (req, res) => {
     }
 });
 
+postRouter.post("/likePost", async (req, res) => {
+    const { likeType, actorId, postId } = req.body;
+
+    try {
+        let post = await postSchema.findByIdAndUpdate(postId, {
+            $push: {
+                likes: {
+                    actorId,
+                    likeType,
+                },
+            },
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send({
+            message: "sth is wrong",
+        });
+    }
+});
+
 module.exports = postRouter;
