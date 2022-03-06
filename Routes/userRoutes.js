@@ -52,6 +52,33 @@ userRouter.post("/signUp", async (req, res) => {
     }
 });
 
+userRouter.post("/signin", async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res.status(400).send("invalid email or password");
+    }
+    try {
+        const savedUser = await userSchema.findOne({ email: email });
+        if (!savedUser) {
+            res.status(400).send("invalid email or password");
+        }
+        const passwordMatch = await bcrypt.compare(
+            password,
+            savedUser.password
+        );
+        if (passwordMatch) {
+            res.send({
+                message: "You are successfully signed in",
+            });
+        } else {
+            return res.status(400).send("invalid email or passsword");
+        }
+    } catch (err) {
+        res.send("sth went wrong");
+        console.log(err || "sth went wrong");
+    }
+});
+
 // update status api
 // Authentication blah blah to be added
 userRouter.put("/update/:userName", async (req, res) => {
