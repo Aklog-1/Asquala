@@ -2,6 +2,7 @@ const { Router } = require("express");
 const userSchema = require("../Model/User");
 
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userRouter = Router();
 
@@ -59,6 +60,7 @@ userRouter.post("/signin", async (req, res) => {
     }
     try {
         const savedUser = await userSchema.findOne({ email: email });
+        console.log("saved user is ", savedUser);
         if (!savedUser) {
             res.status(400).send("invalid email or password");
         }
@@ -67,14 +69,16 @@ userRouter.post("/signin", async (req, res) => {
             savedUser.password
         );
         if (passwordMatch) {
-            res.send({
-                message: "You are successfully signed in",
-            });
+            console.log("inner saved user", savedUser);
+            const token = jwt.sign(
+                { _id: savedUser._id },
+                process.env.JWT_SECRET
+            );
+            res.json({ token });
         } else {
             return res.status(400).send("invalid email or passsword");
         }
     } catch (err) {
-        res.send("sth went wrong");
         console.log(err || "sth went wrong");
     }
 });
