@@ -3,6 +3,7 @@ const userSchema = require("../Model/User");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const loginrequired = require("../Middleware/loginRequire");
 
 const userRouter = Router();
 
